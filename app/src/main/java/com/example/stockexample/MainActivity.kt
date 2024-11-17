@@ -93,9 +93,9 @@ fun MainScreen() {
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize(),
-            indices = indices,
-            investmentSummary = investmentSummary,
-            holdings = holdings
+            indices = { indices },
+            investmentSummary = { investmentSummary },
+            holdings = { holdings }
         )
     }
 
@@ -114,16 +114,16 @@ fun MainScreen() {
 @Composable
 fun MainScreenContent(
     modifier: Modifier,
-    indices: ImmutableList<MarketIndiceData>,
-    investmentSummary: InvestmentSummary,
-    holdings: ImmutableList<HoldingDetailData>
+    indices: () -> ImmutableList<MarketIndiceData>,
+    investmentSummary: () -> InvestmentSummary,
+    holdings: () -> ImmutableList<HoldingDetailData>
 ) {
     LazyColumn(
         modifier = modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item {
-            MarketIndices(indices = indices)
+            MarketIndices(indicesProvider = indices)
         }
 
         item {
@@ -135,17 +135,17 @@ fun MainScreenContent(
 
             InvestmentSummary(
                 modifier = Modifier.fillMaxWidth(),
-                data = investmentSummary
+                dataProvider = investmentSummary
             )
         }
 
-        StockHoldings(holdings = holdings)
+        StockHoldings(holdingsProvider = holdings)
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 private fun LazyListScope.StockHoldings(
-    holdings: ImmutableList<HoldingDetailData>
+    holdingsProvider: () -> ImmutableList<HoldingDetailData>
 ) {
     stickyHeader {
         Row(
@@ -165,6 +165,7 @@ private fun LazyListScope.StockHoldings(
         }
     }
 
+    val holdings = holdingsProvider()
     itemsIndexed(
         items = holdings,
         key = { _, data -> data.id },
@@ -185,13 +186,16 @@ private fun LazyListScope.StockHoldings(
 }
 
 @Composable
-private fun MarketIndices(modifier: Modifier = Modifier, indices: ImmutableList<MarketIndiceData>) {
+private fun MarketIndices(
+    modifier: Modifier = Modifier,
+    indicesProvider: () -> ImmutableList<MarketIndiceData>
+) {
     // Deliberately not using LazyRow as there won't be more indices even in the real app.
     Row(
         modifier.horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        indices.forEach { data ->
+        indicesProvider().forEach { data ->
             MarketIndice(modifier = Modifier.width(132.dp), data = data)
         }
     }
@@ -312,17 +316,19 @@ fun MainScreenPreview() {
 
             MainScreenContent(
                 modifier = Modifier,
-                indices = indices,
-                investmentSummary = InvestmentSummary(
-                    currentAmount = "₹ 15,000",
-                    investedAmount = "₹ 10,000",
-                    returnsSummary = ReturnsSummary(
-                        totalReturns = "₹ 5,000",
-                        returnsPercent = 50f,
-                        change = Change.POSITIVE
+                indices = { indices },
+                investmentSummary = {
+                    InvestmentSummary(
+                        currentAmount = "₹ 15,000",
+                        investedAmount = "₹ 10,000",
+                        returnsSummary = ReturnsSummary(
+                            totalReturns = "₹ 5,000",
+                            returnsPercent = 50f,
+                            change = Change.POSITIVE
+                        )
                     )
-                ),
-                holdings = holdings
+                },
+                holdings = { holdings }
             )
         }
     }
