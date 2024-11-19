@@ -24,8 +24,9 @@ import com.example.stockexample.ui.theme.SuccessGreen
 @Composable
 fun InvestmentSummary(
     modifier: Modifier = Modifier,
-    data: InvestmentSummary
+    dataProvider: () -> InvestmentSummary
 ) {
+    val data = dataProvider()
     Card(
         modifier.fillMaxWidth(),
         shape = CardDefaults.outlinedShape,
@@ -96,15 +97,17 @@ fun InvestmentSummaryPositivePreview() {
     StockExampleTheme {
         InvestmentSummary(
             modifier = Modifier.padding(24.dp),
-            InvestmentSummary(
-                currentAmount = "₹ 15,000",
-                investedAmount = "₹ 10,000",
-                returnsSummary = ReturnsSummary(
-                    totalReturns = "₹ 5,000",
-                    returnsPercent = 50f,
-                    change = Change.POSITIVE
+            dataProvider = {
+                InvestmentSummary(
+                    currentAmount = "₹ 15,000",
+                    investedAmount = "₹ 10,000",
+                    returnsSummary = ReturnsSummary(
+                        totalReturns = "₹ 5,000",
+                        returnsPercent = 50f,
+                        change = Change.POSITIVE
+                    )
                 )
-            )
+            }
         )
     }
 }
@@ -115,15 +118,17 @@ fun InvestmentSummaryNegativePreview() {
     StockExampleTheme {
         InvestmentSummary(
             modifier = Modifier.padding(24.dp),
-            InvestmentSummary(
-                currentAmount = "₹ 5,000",
-                investedAmount = "₹ 15,000",
-                returnsSummary = ReturnsSummary(
-                    totalReturns = "₹ 5,000",
-                    returnsPercent = 50f,
-                    change = Change.NEGATIVE
+            dataProvider = {
+                InvestmentSummary(
+                    currentAmount = "₹ 5,000",
+                    investedAmount = "₹ 15,000",
+                    returnsSummary = ReturnsSummary(
+                        totalReturns = "₹ 5,000",
+                        returnsPercent = 50f,
+                        change = Change.NEGATIVE
+                    )
                 )
-            )
+            }
         )
     }
 }
@@ -134,15 +139,17 @@ fun InvestmentSummaryNeutralPreview() {
     StockExampleTheme {
         InvestmentSummary(
             modifier = Modifier.padding(24.dp),
-            InvestmentSummary(
-                currentAmount = "₹ 10,000",
-                investedAmount = "₹ 10,000",
-                returnsSummary = ReturnsSummary(
-                    totalReturns = "₹ 0",
-                    returnsPercent = 0.0f,
-                    change = Change.NEUTRAL
+            dataProvider = {
+                InvestmentSummary(
+                    currentAmount = "₹ 10,000",
+                    investedAmount = "₹ 10,000",
+                    returnsSummary = ReturnsSummary(
+                        totalReturns = "₹ 0",
+                        returnsPercent = 0.0f,
+                        change = Change.NEUTRAL
+                    )
                 )
-            )
+            }
         )
     }
 }
