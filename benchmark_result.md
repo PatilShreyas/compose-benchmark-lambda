@@ -8,7 +8,7 @@ Benchmark tests were performed on the three devices -
 - Before: Implementation of the compose UI having direct state propagated through the composables
 - After: Implementation of the compose UI having state propogated through the composables via lambda.
 
-### Iteration 2
+### Iteration 1
 
 ```
 - Before
@@ -62,6 +62,34 @@ gfxFrameTime99thPercentileMs   min   150.0,   median   150.0,   max   200.0
 gfxFrameTotalCount             min   103.0,   median   108.0,   max   119.0
 memoryHeapSizeMaxKb            min 8,076.0,   median 8,841.5,   max 9,694.0
 frameDurationCpuMs             P50     12.9,   P90     27.6,   P95     34.5,   P99    197.8
+```
+
+### Iteration 3 (R8 Enabled - Full Mode)
+
+```
+- Before	
+StockScreenBenchmark_startup
+frameCount                     min   114.0,   median   119.0,   max   126.0
+gfxFrameJankPercent            min    47.5,   median    51.5,   max    53.9
+gfxFrameTime50thPercentileMs   min    16.0,   median    16.5,   max    17.0
+gfxFrameTime90thPercentileMs   min    25.0,   median    25.0,   max    26.0
+gfxFrameTime95thPercentileMs   min    26.0,   median    28.5,   max    32.0
+gfxFrameTime99thPercentileMs   min   125.0,   median   129.0,   max   150.0
+gfxFrameTotalCount             min   116.0,   median   120.5,   max   127.0
+memoryHeapSizeMaxKb            min 9,209.0,   median 9,321.0,   max 9,402.0
+frameDurationCpuMs             P50     16.9,   P90     25.9,   P95     29.3,   P99    136.3
+	
+- After	
+StockScreenBenchmark_startup
+frameCount                     min   112.0,   median   119.5,   max   125.0
+gfxFrameJankPercent            min    43.3,   median    45.1,   max    49.1
+gfxFrameTime50thPercentileMs   min    11.0,   median    12.0,   max    16.0
+gfxFrameTime90thPercentileMs   min    21.0,   median    22.0,   max    22.0
+gfxFrameTime95thPercentileMs   min    23.0,   median    27.0,   max    32.0
+gfxFrameTime99thPercentileMs   min   125.0,   median   132.0,   max   150.0
+gfxFrameTotalCount             min   114.0,   median   121.0,   max   127.0
+memoryHeapSizeMaxKb            min 7,259.0,   median 7,308.5,   max 7,372.0
+frameDurationCpuMs             P50     12.3,   P90     22.2,   P95     31.3,   P99    146.1
 ```
 
 ---
