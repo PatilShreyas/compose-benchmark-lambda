@@ -92,6 +92,35 @@ memoryHeapSizeMaxKb            min 7,259.0,   median 7,308.5,   max 7,372.0
 frameDurationCpuMs             P50     12.3,   P90     22.2,   P95     31.3,   P99    146.1
 ```
 
+### Iteration 4 (R8 Enabled - Full Mode)
+
+```
+- Before
+StockScreenBenchmark_startup
+frameCount                     min   114.0,   median   120.0,   max   125.0
+gfxFrameJankPercent            min    48.4,   median    51.7,   max    54.8
+gfxFrameTime50thPercentileMs   min    16.0,   median    17.0,   max    18.0
+gfxFrameTime90thPercentileMs   min    25.0,   median    25.0,   max    26.0
+gfxFrameTime95thPercentileMs   min    25.0,   median    27.5,   max    32.0
+gfxFrameTime99thPercentileMs   min   117.0,   median   139.5,   max   150.0
+gfxFrameTotalCount             min   115.0,   median   121.0,   max   126.0
+memoryHeapSizeMaxKb            min 9,274.0,   median 9,338.0,   max 9,402.0
+frameDurationCpuMs             P50     16.8,   P90     25.8,   P95     27.7,   P99    140.2
+
+- After
+StockScreenBenchmark_startup
+frameCount                     min   113.0,   median   120.5,   max   125.0
+gfxFrameJankPercent            min    42.9,   median    45.3,   max    49.1
+gfxFrameTime50thPercentileMs   min    11.0,   median    11.0,   max    13.0
+gfxFrameTime90thPercentileMs   min    21.0,   median    21.0,   max    22.0
+gfxFrameTime95thPercentileMs   min    22.0,   median    24.5,   max    31.0
+gfxFrameTime99thPercentileMs   min   109.0,   median   129.0,   max   150.0
+gfxFrameTotalCount             min   114.0,   median   122.0,   max   126.0
+memoryHeapSizeMaxKb            min 7,579.0,   median 7,641.0,   max 7,724.0
+frameDurationCpuMs             P50     12.2,   P90     21.7,   P95     24.7,   P99    146.0
+```
+
+```
 ---
 
 ## 2. Device - Moto G20 (Firebase Test Lab Device - Android 11, 4 GB RAM)
